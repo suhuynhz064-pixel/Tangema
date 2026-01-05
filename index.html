@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Gửi Cậu ❤️</title>
+    <style>
+        :root { --pink: #ff4d6d; --bg: #fff0f3; }
+        body { margin: 0; padding: 0; background: var(--bg); font-family: 'Arial', sans-serif; overflow: hidden; height: 100vh; display: flex; justify-content: center; align-items: center; }
+
+        /* Hiệu ứng tim rơi */
+        .heart { position: fixed; color: var(--pink); font-size: 15px; z-index: 999; pointer-events: none; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        /* Bước 1: Hộp thư bên ngoài */
+        #step1 { text-align: center; cursor: pointer; animation: bounce 1.5s infinite; }
+        .mail-box { font-size: 80px; margin-bottom: 10px; }
+        .img-small { width: 120px; height: 120px; object-fit: cover; border-radius: 15px; border: 3px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 15px; }
+        h3 { color: var(--pink); font-weight: 900; font-size: 18px; margin: 0; }
+
+        /* Bước 2: Nội dung chính khi mở quà */
+        #step2 { display: none; text-align: center; width: 85%; max-width: 350px; animation: zoomIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+        
+        .rect-card { background: #fff; padding: 20px; border-radius: 25px; border: 3px solid var(--pink); box-shadow: 0 10px 25px rgba(255, 77, 109, 0.2); }
+        .img-inside { width: 100%; max-width: 200px; border-radius: 15px; margin-bottom: 15px; }
+        .question { color: var(--pink); font-size: 18px; font-weight: 900; line-height: 1.4; }
+
+        /* Nút bấm */
+        .btn-group { display: flex; justify-content: center; gap: 15px; margin-top: 25px; position: relative; height: 50px; }
+        .btn { padding: 10px 30px; border-radius: 50px; border: none; font-weight: 900; font-size: 16px; cursor: pointer; transition: 0.2s; }
+        .btn-yes { background: #34C759; color: #fff; box-shadow: 0 4px 10px rgba(52, 199, 89, 0.3); }
+        .btn-no { background: #8e8e93; color: #fff; position: absolute; }
+
+        #final { display: none; color: var(--pink); font-size: 22px; font-weight: 900; margin-top: 20px; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    </style>
+</head>
+<body>
+
+    <audio id="nhac" src="https://files.catbox.moe/k0buec.mp3" loop></audio>
+
+    <div id="step1" onclick="openBox()">
+        <img src="https://files.catbox.moe/ltbfcw.jpeg" class="img-small">
+        <div class="mail-box">📩</div>
+        <h3>Mở đi cậu gì đó ơi 😝</h3>
+    </div>
+
+    <div id="step2">
+        <div class="rect-card">
+            <img src="https://files.catbox.moe/i1uome.jpeg" class="img-inside">
+            <div class="question">cuccc zangggg có dthhh hummm 🥰</div>
+            
+            <div class="btn-group">
+                <button class="btn btn-yes" onclick="win()">CÓ ❤️</button>
+                <button class="btn btn-no" id="dell" onmouseover="move()" onclick="move()">DELL</button>
+            </div>
+            <div id="final">T bít màaa! Yêu ghê 💋</div>
+        </div>
+    </div>
+
+    <script>
+        // Tạo hiệu ứng tim rơi tự động
+        setInterval(() => {
+            const h = document.createElement('div');
+            h.classList.add('heart');
+            h.innerHTML = '❤️';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.animationDuration = Math.random() * 2 + 3 + 's';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 4000);
+        }, 400);
+
+        // Hàm mở hộp quà
+        function openBox() {
+            document.getElementById('nhac').play();
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+        }
+
+        // Nút "DELL" tự động chạy trốn
+        function move() {
+            const btn = document.getElementById('dell');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        // Khi nhấn nút "CÓ"
+        function win() {
+            document.getElementById('dell').style.display = 'none';
+            document.getElementById('final').style.display = 'block';
+            for(let i=0; i<30; i++) {
+                setTimeout(() => {
+                    const h = document.createElement('div');
+                    h.classList.add('heart');
+                    h.innerHTML = '💖';
+                    h.style.left = Math.random() * 100 + 'vw';
+                    h.style.fontSize = '30px';
+                    h.style.animationDuration = '2s';
+                    document.body.appendChild(h);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
