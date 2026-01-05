@@ -8,7 +8,7 @@
         :root { --pink: #ff4d6d; --bg: #fff0f3; }
         body { margin: 0; padding: 0; background: var(--bg); font-family: 'Arial', sans-serif; overflow: hidden; height: 100vh; display: flex; justify-content: center; align-items: center; }
 
-        /* Hiệu ứng tim rơi */
+        /* Tim rơi */
         .heart { position: fixed; color: var(--pink); font-size: 15px; z-index: 999; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
@@ -18,7 +18,7 @@
         .img-small { width: 120px; height: 120px; object-fit: cover; border-radius: 15px; border: 3px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-bottom: 15px; }
         h3 { color: var(--pink); font-weight: 900; font-size: 18px; margin: 0; }
 
-        /* Bước 2: Nội dung chính khi mở quà */
+        /* Bước 2: Nội dung chính */
         #step2 { display: none; text-align: center; width: 85%; max-width: 350px; animation: zoomIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         @keyframes zoomIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
         
@@ -60,7 +60,7 @@
     </div>
 
     <script>
-        // Tạo hiệu ứng tim rơi tự động
+        // Tim rơi
         setInterval(() => {
             const h = document.createElement('div');
             h.classList.add('heart');
@@ -71,14 +71,12 @@
             setTimeout(() => h.remove(), 4000);
         }, 400);
 
-        // Hàm mở hộp quà
         function openBox() {
             document.getElementById('nhac').play();
             document.getElementById('step1').style.display = 'none';
             document.getElementById('step2').style.display = 'block';
         }
 
-        // Nút "DELL" tự động chạy trốn
         function move() {
             const btn = document.getElementById('dell');
             const x = Math.random() * (window.innerWidth - btn.offsetWidth);
@@ -88,10 +86,10 @@
             btn.style.top = y + 'px';
         }
 
-        // Khi nhấn nút "CÓ"
         function win() {
             document.getElementById('dell').style.display = 'none';
             document.getElementById('final').style.display = 'block';
+            // Bắn tim cực nhiều khi nhấn Có
             for(let i=0; i<30; i++) {
                 setTimeout(() => {
                     const h = document.createElement('div');
